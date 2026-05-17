@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Properties</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/property/add">Add Property</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>My Properties</h2>
+
+    {% if properties %}
+        {% for p in properties %}
+            <div class="card">
+                <h3>{{ p.title }}</h3>
+                <p><strong>Price:</strong> {{ p.price }}</p>
+                <p><strong>City:</strong> {{ p.city }}</p>
+                <p><strong>Purpose:</strong> {{ p.purpose }}</p>
+                <p>{{ p.description }}</p>
+                   <div style="margin-top:10px">
+                    <a href="/property/edit/{{ p.id }}" class="btn">✏ Edit</a>
+                    <a href="/property/delete/{{ p.id }}" class="btn danger"
+                       onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No properties added yet.</p>
+    {% endif %}
+</div>
+</body>
+</html>

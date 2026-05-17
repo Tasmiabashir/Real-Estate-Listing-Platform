@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2>Edit Property</h2>
+
+    <form method="POST" class="form-box">
+        <label>Title</label>
+        <input type="text" name="title" value="{{ property.title }}" required>
+
+        <label>Price</label>
+        <input type="text" name="price" value="{{ property.price }}" required>
+
+        <label>City</label>
+        <input type="text" name="city" value="{{ property.city }}" required>
+
+        <label>Purpose</label>
+        <select name="purpose">
+            <option value="Sale" {% if property.purpose == "Sale" %}selected{% endif %}>Sale</option>
+            <option value="Rent" {% if property.purpose == "Rent" %}selected{% endif %}>Rent</option>
+        </select>
+
+        <label>Description</label>
+        <textarea name="description" rows="4">{{ property.description }}</textarea>
+
+        <button type="submit">Update Property</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+<div class="nav">
+    <a href="/agent/dashboard">Dashboard</a>
+    <a href="/property/add">Add Property</a>
+    <a href="/agent/properties">My Properties</a>
+    <a href="/messages">Messages</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Agent Dashboard</h2>
+    <p>Welcome, <b>{{ session["user_name"] }}</b></p>
+
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Total Properties</h3>
+            <p>{{ stats.total or 0 }}</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Pending Approval</h3>
+            <p>{{ stats.pending or 0 }}</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Approved</h3>
+            <p>{{ stats.approved or 0 }}</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Rejected</h3>
+            <p>{{ stats.rejected or 0 }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

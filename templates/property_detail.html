@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+</div>
+
+<div class="container">
+   {% if property.image %}
+    <img src="{{ url_for('static', filename='uploads/' ~ property.image) }}"
+         style="width:100%; max-height:400px; object-fit:cover;">
+{% else %}
+    <img src="{{ url_for('static', filename='no-image.png') }}"
+         style="width:100%; max-height:400px; object-fit:cover;">
+{% endif %}
+
+
+    <h2>{{ property.title }}</h2>
+
+    <p><strong>City:</strong> {{ property.city }}</p>
+    <p><strong>Price:</strong> {{ property.price }}</p>
+    <p><strong>Purpose:</strong> {{ property.purpose }}</p>
+
+    <p>{{ property.description }}</p>
+
+    <hr>
+
+    <p><strong>Interested?</strong></p>
+
+    {% if session.get("user_id") %}
+        <a href="/message/{{ property.id }}">Send Message to Owner</a>
+    {% else %}
+        <p><a href="/login">Login to contact owner</a></p>
+    {% endif %}
+</div>
+
+</body>
+</html>

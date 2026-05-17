@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+<div class="nav">
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, <strong>{{ session['user_name'] }}</strong></p>
+
+    <!-- STAT BOXES -->
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Total Properties</h3>
+            <p>{{ total_properties or 0 }}</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Pending Approval</h3>
+            <p>{{ pending_properties or 0 }}</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Approved Properties</h3>
+            <p>{{ approved_properties or 0 }}</p>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="admin-actions">
+        <h3>Admin Actions</h3>
+
+        <a href="/admin/properties/pending">Review Pending Properties</a>
+        <a href="/admin/properties">All Properties</a>
+        <a href="/admin/agents">Agents</a>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

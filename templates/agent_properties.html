@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Properties</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/agent/dashboard">Dashboard</a>
+    <a href="/property/add">Add Property</a>
+    <a href="/messages">Messages</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>My Properties</h2>
+    <p>Check approval status of your submitted properties</p>
+
+{% if properties %}
+<table class="agents-table">
+    <tr>
+        <th>Title</th>
+        <th>City</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+
+    {% for p in properties %}
+    <tr>
+        <td>{{ p["title"] }}</td>
+        <td>{{ p["city"] }}</td>
+        <td>{{ p["price"] }}</td>
+        <td class="{{ p['status'] }}">{{ p["status"] }}</td>
+    
+        <td>
+            {% if p["image"] %}
+                <img src="{{ url_for('static', filename='uploads/' ~ p['image']) }}"
+                     style="width:80px; height:60px; object-fit:cover;">
+            {% else %}
+                <form action="{{ url_for('upload_property_image', property_id=p['id']) }}"
+                      method="POST"
+                      enctype="multipart/form-data">
+
+                    <input type="file" name="image" required>
+                    <button type="submit">Upload</button>
+                </form>
+                
+            {% endif %}
+        </td>
+         <td><div style="margin-top:10px">
+                    <a href="/property/edit/{{ p.id }}" class="btn">✏ Edit</a>
+                    <a href="/property/delete/{{ p.id }}" class="btn danger"
+                       onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                </div></td>
+    </tr>
+    
+    {% endfor %}
+</table>
+{% else %}
+<p>No properties found.</p>
+{% endif %}
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+<div class="nav">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <div class="dashboard-box">
+    <h1>Welcome, {{ session['user_name'] }}</h1>
+    <p>This is your dashboard.</p>
+
+    <div class="dashboard-actions">
+        <a href="/property/add" class="dashboard-card add">
+            <h3>Add Property</h3>
+            <span>Create a new listing</span>
+        </a>
+
+        <a href="/my-properties" class="dashboard-card my">
+            <h3>My Properties</h3>
+            <span>Manage your listings</span>
+        </a>
+
+        <a href="/messages" class="dashboard-card msg">
+            <h3>Messages</h3>
+            <span>View buyer inquiries</span>
+        </a>
+    </div>
+</div>
+
+
+</div>
+{% endblock %}
+</body>
+</html>

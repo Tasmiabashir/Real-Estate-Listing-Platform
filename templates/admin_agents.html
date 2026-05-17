@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agents</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Agents Overview</h2>
+
+    {% if agents %}
+        <table class="agents-table">
+            <tr>
+                <th>Agent Name</th>
+                <th>Email</th>
+                <th>Total</th>
+                <th>Pending</th>
+                <th>Approved</th>
+                <th>Rejected</th>
+            </tr>
+
+            {% for a in agents %}
+            <tr>
+                <td>{{ a.name }}</td>
+                <td>{{ a.email }}</td>
+                <td>{{ a.total_properties }}</td>
+                <td class="pending">{{ a.pending or 0 }}</td>
+                <td class="approved">{{ a.approved or 0 }}</td>
+                <td class="rejected">{{ a.rejected or 0 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No agents found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Message</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+</div>
+
+<div class="container">
+    <h2>Message Property Owner</h2>
+
+    <p><strong>Property:</strong> {{ property.title }}</p>
+
+    <form method="POST">
+        <label>Your Message</label>
+        <textarea name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+</body>
+</html>

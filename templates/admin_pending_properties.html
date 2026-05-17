@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pending Properties</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="nav">
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Pending Property Approvals</h2>
+
+    {% if properties %}
+        {% for p in properties %}
+            <div class="card">
+                <h3>{{ p.title }}</h3>
+                <p><b>City:</b> {{ p.city }}</p>
+                <p><b>Price:</b> {{ p.price }}</p>
+                <p><b>Description:</b> {{ p.description }}</p>
+
+                <a href="/admin/property/approve/{{ p.id }}">✅ Approve</a>
+                |
+                <a href="/admin/property/reject/{{ p.id }}">❌ Reject</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No pending properties.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
